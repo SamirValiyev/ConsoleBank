@@ -1,0 +1,1 @@
+Bank console project. The user who enters the system is presented with a menu. He makes the desired selection from the menu and performs banking operations. These options include taking out a loan, making monthly loan payments, and issuing a report, etc.
