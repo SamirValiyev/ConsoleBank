@@ -31,7 +31,7 @@
         }
         public static int ExtentisonMethod(int secim)
         {
-            int balans = 0;  
+            decimal balans = 100;  
             int aylarinSayi = 0;  //iterasiyada secdiyim ay sayi 
             int ayliqBorc=0;
             int umumiBorc=0;
