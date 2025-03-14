@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleBank_Ders5
 {
-    public class Bank:BankService
+    public class Bank
     {
+        private readonly BankService _service;
+        public Bank(BankService service)
+        {
+            _service = service;
+        }
         const string userName = "admin";
         const string password = "admin";
         public void UserProtection(string name, string surname)
@@ -21,8 +26,9 @@ namespace ConsoleBank_Ders5
                 Console.WriteLine("[2] Kredit Odemek");
                 Console.WriteLine("[3] Hesabat");
                 int secimOne = int.Parse(Console.ReadLine());
-                BankService service = new();
-                service.Service(secimOne);
+                _service.Service(secimOne);
+                
+               
 
             }
             else

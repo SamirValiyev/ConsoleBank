@@ -20,6 +20,7 @@ namespace ConsoleBank_Ders5
 
         public int NumberofMonthsForPayment(int month)
         {
+
             return month;
         }
     }
