@@ -27,20 +27,27 @@ namespace ConsoleBank_Ders5
             switch (choice)
             {
                 case 1:
-                    Console.WriteLine(@"           Kredit goturmek          
-Nece ayliq goturmek isdediyinizi daxil edin:
-");
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.WriteLine(@"    Kredit Goturmek      ");
+                    Console.ResetColor();
+                    Console.WriteLine(@"Kreditin ay sayini qeyd edin: ");
                     Month=int.Parse(Console.ReadLine());
                     Console.WriteLine("Goturmek isdediyiniz meblegi zehmet olmasa qeyd edin:");
                     LoanAmount=int.Parse(Console.ReadLine());
                     if (Month > 0 && LoanAmount > 0)
                     {
+                        Console.BackgroundColor = ConsoleColor.Red;
                         Interest = Month;  //Faizi Aylarin sayi qeder dinamik etdim.
                         Console.WriteLine($"Faiz derecesi:{Interest}");
                         PublicDebt = LoanAmount + ((LoanAmount * Interest) / 100);
                         Console.WriteLine($"Umumi odenilecek mebleg:{PublicDebt}");
+                        Console.WriteLine($"Ayliq odemeli oldugunuz mebleg:{PublicDebt / Month}");
+                        Console.ResetColor();
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine(@"    Razisiniz?   ");
                         Console.WriteLine(@"[1]Beli      [2]Xeyr");
+                        Console.ResetColor();
+                        Console.Write("Secim edin:");
                         int choice2 = int.Parse(Console.ReadLine());
                         switch (choice2)
                         {
@@ -50,18 +57,35 @@ Nece ayliq goturmek isdediyinizi daxil edin:
                                 Console.WriteLine($"Yekun borcunuz:{PublicDebt}");
                                 _customer.CardBalance = _customer.CardBalance+LoanAmount;
                                 Console.WriteLine($"Balansiniz:{_customer.CardBalance}");
-                                Console.WriteLine($"Odenis etmek isteyirsinizmi?");
+                                Console.WriteLine($"Kredit odemek bolumune kecid etmek isteyirsiniz?");
                                 Console.WriteLine(@"[1]Beli      [2]Xeyr");
                                 int choice3 = int.Parse(Console.ReadLine());
                                 if (choice3 == 1)
                                 {
-                                    Console.WriteLine($"Ayliq odemeli oldugunuz mebleg:{PublicDebt/Month}");
-                                    Console.Write("Ay sayi:");
+                                    Console.BackgroundColor = ConsoleColor.Green;
+                                    Console.WriteLine(@"  Kredit odemek bolumune xos geldiniz  ");
+                                    Console.ResetColor();
+                                    Console.WriteLine($"Umumi odeyeceyiniz mebleg:{PublicDebt}");
+                                    Console.Write("Ay:");
                                     int monthNumber=int.Parse(Console.ReadLine());
+
                                     Console.Write("Ayliq odenilecek mebleg:");
                                     decimal montlhyDebt = decimal.Parse(Console.ReadLine());
-                                    Console.WriteLine(NumberofMonthsForPayment(monthNumber,montlhyDebt));
-                                    break;
+                                    Console.BackgroundColor = ConsoleColor.Blue;
+                                    Console.WriteLine("Kredit odemek ucun 1 duymesine klikleyin:");
+                                    Console.ResetColor();
+                                    int num = int.Parse(Console.ReadLine());
+                                    if (num == 1)
+                                    {
+                                        Console.WriteLine(NumberofMonthsForPayment(monthNumber, montlhyDebt));
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Bizi secdiyiniz ucun tesekkurler!");
+                                        break;
+                                    }
+                                  
  
                                 }
                                 else
@@ -141,11 +165,7 @@ Nece ayliq goturmek isdediyinizi daxil edin:
                     Console.WriteLine(NumberofMonthsForPayment(monthNumber2, montlhyDebt2));
                 break;
                 case 3:
-                    Console.WriteLine($"Eziz {_customer.FullName} hesabatiniz asagidaki kimidir.");
-                    Console.WriteLine("Hesabat:");
-                    Console.WriteLine($"Yekun borcunuz:{PublicDebt}");
-                    Console.WriteLine($"Kreditin ay sayi:{Month}");
-                    Console.WriteLine($"Faiz:{Interest}");
+                    Report();
                 break;
 
 
@@ -159,12 +179,27 @@ Nece ayliq goturmek isdediyinizi daxil edin:
         {
             if (monthlyDebt > 0 && month > 0)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Odenisiniz ugurla edildi!!");
+                Console.ResetColor();
 
                 PublicDebt = PublicDebt - (monthlyDebt * month);
                 Console.Write($"Qalan borcunuz:{PublicDebt}");
-                _customer.CardBalance = _customer.CardBalance - (monthlyDebt * month);
-                Console.Write($"Qalan balansiniz:{_customer.CardBalance}");
+                Month = Month - month;
+                Console.WriteLine($"Qalan ay:{Month}");
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("[0] Cixis");
+                Console.WriteLine("[1] Kredit Goturmek");
+                Console.WriteLine("[2] Kredit Odemek");
+                Console.WriteLine("[3] Hesabat");
+                Console.ResetColor();
+                Console.Write("Secim edin:");
+                int cho=int.Parse(Console.ReadLine());
+                if (cho == 3)
+                {
+                    Report();
+                }
             }
             else
             {
@@ -189,6 +224,14 @@ Nece ayliq goturmek isdediyinizi daxil edin:
                 }
             }
             return month;
+        }
+        public void Report()
+        {
+            Console.WriteLine($"Eziz {_customer.Name} hesabatiniz asagidaki kimidir.");
+            Console.WriteLine("Hesabat:");
+            Console.WriteLine($"Yekun borcunuz:{PublicDebt}");
+            Console.WriteLine($"Kreditin ay sayi:{Month}");
+            Console.WriteLine($"Faiz:{Interest}");
         }
         //public int MonthAndLoanForCredit(int month,int loanAmount)
         //{

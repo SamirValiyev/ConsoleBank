@@ -13,13 +13,5 @@ namespace ConsoleBank_Ders5
         public decimal CardBalance { get; set; } = 100;
         public decimal MonthlyDebt { get; set; } = 0;
         public decimal TotalDebt { get; set; } = 0;
-
-
-        public string FullName(string name,string surname)
-        {
-            Name= name;
-            Surname= surname;
-            return Name + " " + Surname;
-        }
     }
 }

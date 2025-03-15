@@ -4,10 +4,15 @@
     {
         public static void Main(string[] args) 
         {
-
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Zehmet olmasa adinizi daxil edin");
+            Console.ResetColor();
             string userName = Console.ReadLine();
+
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Zehmet olmasa passwordu daxil edin");
+            Console.ResetColor();
             string userPassword = Console.ReadLine();
 
             Customer customer = new Customer();

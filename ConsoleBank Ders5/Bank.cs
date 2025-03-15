@@ -19,12 +19,18 @@ namespace ConsoleBank_Ders5
         {
             if (name == userName && surname == password)
             {
-                Console.WriteLine("Bankimiza xos geldin Admin");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(@"      Bankimiza xos geldin Admin      ");
+                Console.ResetColor();
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Secimler:");
                 Console.WriteLine("[0] Cixis");
                 Console.WriteLine("[1] Kredit Goturmek");
                 Console.WriteLine("[2] Kredit Odemek");
                 Console.WriteLine("[3] Hesabat");
+                Console.ResetColor();
+                Console.Write("Secim edin:");
                 int secimOne = int.Parse(Console.ReadLine());
                 _service.Service(secimOne);
                 
